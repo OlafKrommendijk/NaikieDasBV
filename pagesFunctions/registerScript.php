@@ -1,6 +1,5 @@
 <?php
-
-include("../header.php");
+require_once '../pagesInclude/DBconfig.php';
 
 //Gets data from from
 if (isset($_POST["submit"])) {

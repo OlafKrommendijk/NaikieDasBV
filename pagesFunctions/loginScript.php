@@ -1,6 +1,5 @@
 <?php
-
-require_once('../DBconfig.php');
+require_once '../pagesInclude/DBconfig.php';
 
 $error = " ";
 
