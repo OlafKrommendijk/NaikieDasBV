@@ -11,10 +11,10 @@
         <nav class="main-nav">
             <ul class="main-nav-list">
                 <li>
-                    <a class="loginButton" href="">Uitloggen</a>
+                    <a class="loginButton" href="logout.php">Uitloggen</a>
                 </li>
                 <li>
-                    <a class="homepageButton" href="../pagesInclude/homepage.php">HomePage</a>
+                    <a class="homepageButton" href="homepage.php">HomePage</a>
                 </li>
         </nav>
     </div>

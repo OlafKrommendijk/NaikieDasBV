@@ -1,8 +1,10 @@
 <?php
-require_once('../header.php')
+require_once('header.php')
 ?>
 <head>
     <link rel="stylesheet" href="../assets/css/homepageStyle.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
 </head>
 
 <div id="page-wrapper">
@@ -30,7 +32,7 @@ require_once('../header.php')
         <!--        Create a way to check if someone is logged in and a manager, if the user is show the following button-->
         <br>
         <div class="buttonShell">
-            <a class="newOfferButton" href=loggedinHeader.php>Nieuwe vacature toevoegen</a>
+            <a class="newOfferButton" href=./loggedinHeader.php>Nieuwe vacature toevoegen</a>
         </div>
     </div>
 

@@ -1,5 +1,5 @@
 <?php
-require_once('../header.php')
+require_once('header.php')
 ?>
 <head>
     <link rel="stylesheet" href="../assets/css/header.css">

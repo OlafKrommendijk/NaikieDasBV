@@ -25,6 +25,9 @@ if (isset($_POST["submit"])) {
         $hash = $result["password"];
         //If the password is right we send them through
         if (password_verify($password, $hash)) {
+            $_SESSION["email"] = $result["email"];
+            $_SESSION["status"] = 1;
+
             echo "<script>alert('Inloggegevens geldig!');</script>";
             echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
             exit;
