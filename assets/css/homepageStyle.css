@@ -1,3 +1,21 @@
-#page-wrapper{
-    background-color: blue;
+.left-bar{
+    float: left;
+    width: 20%;
+    min-width: 120px;
+}
+.left-bar input{
+    max-width: 90%;
+}
+
+.right-bar{
+    width: 70%;
+    float: right;
+    text-align: center;
+    align-content: center;
+}
+
+.offer{
+    margin-top: 2em;
+    width: 100%;
+    border: 3px solid black;
 }
