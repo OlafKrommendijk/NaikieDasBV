@@ -17,14 +17,14 @@ require_once('../header.php')
         <input type="submit" id="submit" value="Inloggen" />
     </form>
 
-    <form class="registerForm" name="register" method="POST" enctype="multipart/form-data" action=" ">
+    <form class="registerForm" name="register" method="POST" enctype="multipart/form-data" action="../pagesFunctions/registerScript.php">
         <h3>Registreren</h3>
         <p>Email</p>
-        <input required type="email" name="emailRegister" placeholder="bij@voorbeeld.com"  />
+        <input required type="email" name="email" placeholder="bij@voorbeeld.com"  />
         <p>Wachtwoord</p>
-        <input required type="password" name="passwordRegister" placeholder="Wachtwoord" />
+        <input required type="password" name="password" placeholder="Wachtwoord" />
         <input type="hidden" name="submit" value="true" />
-        <input type="submit" id="submit" value="Registreren" />
+        <input type="submit" id="submit" value="Registreren"/>
     </form>
 </div>
 </body>
