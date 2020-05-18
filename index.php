@@ -1,5 +1,4 @@
 <?php
 //Laad de benodigde bestanden in
-include_once('header.php');
-include_once('pages/homePage.php');
-include_once('footer.php');
+include_once('config/header.php');
+include_once('pagesInclude/homepage.php');
