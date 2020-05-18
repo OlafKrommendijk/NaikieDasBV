@@ -37,8 +37,18 @@ require_once('header.php')
     </div>
 
     <div class="right-bar">
-        <div class="offer">
-            <p>Offer Title</p>
+        <div class="offers">
+            <?php
+                require_once '../pagesFunctions/jobOffer.php';
+
+                $offers = getAllOffers();
+                foreach ($offers as $offer){
+                    echo '<div class="offer">';
+                    echo $offer['name'];
+                    echo '</div>';
+                }
+                ?>
+
         </div>
     </div>
 </div>
