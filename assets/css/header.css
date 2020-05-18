@@ -1,0 +1,22 @@
+.main-header .container {
+    display: flex;
+    align-items: center;
+
+    border: 2px solid black;
+}
+
+.main-nav li {
+    display: inline;
+}
+.main-nav a {
+    display: inline-block;
+    padding: 1.0em;
+}
+
+.loginButton{
+    float: left;
+    border-right: 2px solid black;
+}
+.homepageButton{
+    border-right: 2px solid black;
+}
