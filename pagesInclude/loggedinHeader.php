@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
 </head>
 <body>
 <header class="main-header">
@@ -14,7 +14,7 @@
                     <a class="loginButton" href="">Uitloggen</a>
                 </li>
                 <li>
-                    <a class="homepageButton" href="./pagesInclude/homepage.php">HomePage</a>
+                    <a class="homepageButton" href="../pagesInclude/homepage.php">HomePage</a>
                 </li>
         </nav>
     </div>

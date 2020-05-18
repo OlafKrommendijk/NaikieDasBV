@@ -7,7 +7,7 @@ require_once('../header.php')
 </head>
 
 <div id="page-wrapper">
-    <form name="login" method="POST" enctype="multipart/form-data" action=" ">
+    <form name="login" method="POST" enctype="multipart/form-data" action="../pagesFunctions/loginScript.php" accept-charset="UTF-8">
         <h3>Inloggen</h3>
         <p>Email</p>
         <input required type="email" name="email" placeholder="bij@voorbeeld.com"  />
@@ -27,7 +27,8 @@ require_once('../header.php')
         <input type="submit" id="submit" value="Registreren" />
     </form>
 </div>
-
-
 </body>
-</html>
+
+<?php
+require_once('../pagesFunctions/loginScript.php');
+?>

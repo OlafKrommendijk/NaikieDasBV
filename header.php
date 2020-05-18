@@ -1,7 +1,6 @@
 <?php
 //Load in necessary files
-include("config/DBconfig.php");
-session_start();
+include("DBconfig.php");
 
 //Checks if an user is logged in. If so shows another header
 //if ($_SESSION["STATUS"] === 1) {

@@ -1,8 +1,8 @@
 <?php
-require_once('./header.php')
+require_once('../header.php')
 ?>
 <head>
-    <link rel="stylesheet" href="./assets/css/homepageStyle.css">
+    <link rel="stylesheet" href="../assets/css/homepageStyle.css">
 </head>
 
 <div id="page-wrapper">
