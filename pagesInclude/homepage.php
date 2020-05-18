@@ -25,6 +25,12 @@
             <option value="branch">Filiaal</option>
             <option value="job">Functie</option>
         </select>
+
+        <!--        Create a way to check if someone is logged in and a manager, if the user is show the following button-->
+        <br>
+        <div class="buttonShell">
+            <a class="newOfferButton" href=loggedinHeader.php>Nieuwe vacature toevoegen</a>
+        </div>
     </div>
 
     <div class="right-bar">

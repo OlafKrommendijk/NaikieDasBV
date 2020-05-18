@@ -12,10 +12,23 @@
     float: right;
     text-align: center;
     align-content: center;
+    height: 100%;
 }
 
 .offer{
     margin-top: 2em;
     width: 100%;
     border: 3px solid black;
+}
+
+.buttonShell{
+    margin-top: 5%;
+    min-width: 80px;
+    text-align: center;
+    border: 2px solid black;
+}
+
+.newOfferButton{
+    padding: 2%;
+
 }
