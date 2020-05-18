@@ -11,7 +11,7 @@
         <nav class="main-nav">
             <ul class="main-nav-list">
                 <li>
-                    <a class="loginButton" href="">Inloggen</a>
+                    <a class="loginButton" href="./pagesInclude/login.php">Inloggen</a>
                 </li>
                 <li>
                     <a class="homepageButton" href="./index.php">HomePage</a>
