@@ -1,8 +1,5 @@
 <?php
 session_start();
-
-require_once('header.php');
-
 include 'header.php';
 
 var_dump($_SESSION);
@@ -53,7 +50,7 @@ var_dump($_SESSION);
                 foreach ($offers as $offer){
                     echo '<div class="offer">';
                     echo '<a href="./offerpage.php?id='.$offer["jobofferID"].'">';
-                    echo $offer['name'];
+                    echo $offer['offerName'];
                     echo '</div>';
                 }
                 ?>

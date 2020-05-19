@@ -21,7 +21,7 @@ require_once('header.php');
     echo '<div class="offerBox">';
     echo '<div class="offer">';
     echo '<div class="offerTitle">';
-    echo $offer['name'];
+    echo $offer['offerName'];
     echo '</div><br>';
     echo '<div class="offerDescription">';
     echo $offer['description'];
