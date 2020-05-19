@@ -111,7 +111,7 @@ function addNewJobOffer(){
     $jobDescription = htmlspecialchars($_POST['jobDescription']);
 
     if (!empty($jobFile['name'])) {
-        $target_dir = "../assets/uploads/joboffers";
+        $target_dir = "../assets/uploads/joboffers/";
         $jobDescription = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
         //Trying to upload file
