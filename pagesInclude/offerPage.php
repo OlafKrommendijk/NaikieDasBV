@@ -79,12 +79,23 @@ require_once('header.php');
     $allReactions = getAllReactions($oId);
 
     foreach ($allReactions as $offerReaction) {
+        $offerReactionID = $offerReaction['offerReactionID'];
         echo '<div class="singleReaction">';
-        echo '<a href="download.php">Download CV</a>';
-        echo $offerReaction['motivation'];
-        echo '<a href="download.php">Accepteren</a>';
-        echo '<a href="download.php">Afwijzen</a>';
+        echo '<a href="download.php">Download CV</a><br>';
+        echo '<a href="./acceptReaction.php?id='.$offerReactionID.'">Accepteren</a><br>';
+        echo '<form method="post"> 
+              <input type="hidden" id="reactionId" name="reactionId" value="'.$offerReactionID.'">
+              <input type="submit" name="button" value="Afwijzen"/> 
+              </form> ';
         echo '</div>';
+
+        if(isset($_POST['button'])) {
+            require_once '../pagesFunctions/mailFunctions.php';
+
+            $rId = htmlspecialchars($_POST['reactionId']);
+            sendRejectMail($rId);
+        }
+
     }
 
     ?>

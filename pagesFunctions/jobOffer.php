@@ -62,6 +62,17 @@ function getAllReactions($oId)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getOfferReaction()
+{
+    $db = DBConnection();
+
+    $query = "SELECT * FROM offerreaction WHERE offerReactionID = ?";
+    $stmt = $db->prepare($query);
+    $stmt->execute(array($_GET['id']));
+
+    return $stmt->fetch();
+}
+
 function getAllOffers()
 {
     $db = DBConnection();
