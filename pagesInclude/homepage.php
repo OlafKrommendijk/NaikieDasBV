@@ -29,11 +29,13 @@ require_once('header.php')
             <option value="job">Functie</option>
         </select>
 
-        <!--        Create a way to check if someone is logged in and a manager, if the user is show the following button-->
-        <br>
+        <?php if (isset($_SESSION["manager"])) {
+            echo '<br>
         <div class="buttonShell">
             <a class="newOfferButton" href=./loggedinHeader.php>Nieuwe vacature toevoegen</a>
-        </div>
+        </div>';
+        }
+        ?>
     </div>
 
     <div class="right-bar">
@@ -44,6 +46,7 @@ require_once('header.php')
                 $offers = getAllOffers();
                 foreach ($offers as $offer){
                     echo '<div class="offer">';
+                    echo '<a href="./offerpage.php?id='.$offer["jobofferID"].'">';
                     echo $offer['name'];
                     echo '</div>';
                 }
