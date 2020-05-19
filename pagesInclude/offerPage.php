@@ -9,14 +9,36 @@ require_once('header.php');
 <body>
 
 <div id="page-wrapper">
+    <div class="offerStatus">
+        <?php
+        $oId = $_GET['id'];
+        require_once '../pagesFunctions/jobOffer.php';
+        $offer = getOfferById($oId);
 
+        if ($offer['status'] == 1){
+            echo 'Vacature staat aan';
+        }else{
+            echo 'Vacature staat uit';
+        }
 
+        if (isset($_POST['changeStatus'])) {
+            changeOfferStatus($oId);
+        }
+        ?>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            <label for="status">Kies een status:</label>
+            <br>
+            <select id="status" name="status">
+                <option value="0">Uit</option>
+                <option value="1">Aan</option>
+            </select>
+            <br>
+            <input type="submit" value="Bijwerken!" name="changeStatus">
+        </form>
+    </div>
 
     <?php
-    $oId = $_GET['id'];
-    require_once '../pagesFunctions/jobOffer.php';
-    $offer = getOfferById($oId);
-
 
     echo '<div class="offerBox">';
     echo '<div class="offer">';

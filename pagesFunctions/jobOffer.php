@@ -1,5 +1,5 @@
 <?php
-
+//Here can you find all the function that have a correlation to job offers
 
 function getAllOffers()
 {
@@ -25,6 +25,20 @@ function getOfferById($oId)
     $stmt->execute(array($_GET['id']));
 
     return $stmt->fetch();
+}
+
+function changeOfferStatus($oId)
+{
+    $db = DBConnection();
+
+    $offerStatus = htmlspecialchars($_POST['status']);
+
+    $query = "UPDATE joboffer SET status = ".$offerStatus." WHERE jobOfferID = ".$oId;
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+
+    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+    exit;
 }
 
 function offerReaction()
@@ -65,7 +79,8 @@ function offerReaction()
     echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
 }
 
-function getJobFunctions(){
+function getJobFunctions()
+{
     require_once '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
@@ -77,7 +92,8 @@ function getJobFunctions(){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getJobBranches(){
+function getJobBranches()
+{
     require_once '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
@@ -89,7 +105,8 @@ function getJobBranches(){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function addNewJobOffer(){
+function addNewJobOffer()
+{
     require_once '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
@@ -99,7 +116,7 @@ function addNewJobOffer(){
         exit;
     }
     $jobFile = $_FILES['fileToUpload'];
-    if ((!empty($_POST['jobDescription'])) && !empty($jobFile['name'])){
+    if ((!empty($_POST['jobDescription'])) && !empty($jobFile['name'])) {
         echo "<script>alert('Voeg of alleen een bestand toe of schrijf alleen een beschrijving');</script>";
         echo "<script>window.location.href = '../pagesInclude/addJobOffer.php';</script>";
         exit;
