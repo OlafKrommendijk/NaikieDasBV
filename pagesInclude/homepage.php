@@ -31,9 +31,9 @@ var_dump($_SESSION);
             <option value="branch">Filiaal</option>
             <option value="job">Functie</option>
         </select>
-<!--if (isset($_SESSION["manager"])) {-->
+        <!--if (isset($_SESSION["manager"])) {-->
         <?php
-            echo '<br>
+        echo '<br>
         <div class="buttonShell">
             <a class="newOfferButton" href=./addJobOffer.php>Nieuwe vacature toevoegen</a>
         </div>';
@@ -44,16 +44,17 @@ var_dump($_SESSION);
     <div class="right-bar">
         <div class="offers">
             <?php
-                require_once '../pagesFunctions/jobOffer.php';
+            //gets all offers and shows them
+            require_once '../pagesFunctions/jobOffer.php';
 
-                $offers = getAllOffers();
-                foreach ($offers as $offer){
-                    echo '<div class="offer">';
-                    echo '<a href="./offerpage.php?id='.$offer["jobofferID"].'">';
-                    echo $offer['offerName'];
-                    echo '</div>';
-                }
-                ?>
+            $offers = getAllOffers();
+            foreach ($offers as $offer) {
+                echo '<div class="offer">';
+                echo '<a href="./offerpage.php?id=' . $offer["jobofferID"] . '">';
+                echo $offer['offerName'];
+                echo '</div>';
+            }
+            ?>
 
         </div>
     </div>

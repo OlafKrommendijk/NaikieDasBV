@@ -54,6 +54,7 @@ function sendAcceptMail($rId)
 function sendRejectMail($rId){
     $db = DBConnection();
 
+    //select the right email and offer from db
     $query = "SELECT * FROM offerreaction WHERE offerReactionID = $rId";
     $stmt = $db->prepare($query);
     $stmt->execute();
@@ -65,6 +66,8 @@ function sendRejectMail($rId){
     $stmt = $db->prepare($query);
     $stmt->execute();
     $userEmail = implode($stmt->fetch(PDO::FETCH_ASSOC));
+
+    //fills in the right data and sends the email
     try {
         require 'libraries/phpmailerautoload.php';
         $mail = new PHPMailer();

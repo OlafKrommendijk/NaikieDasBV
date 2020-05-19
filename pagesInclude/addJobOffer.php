@@ -15,11 +15,11 @@ if (isset($_POST["submit"])) {
     <p>Vacature Functie</p>
     <select title="jobFunction" name="jobFunction" id="jobFunction">
         <?php
-            require_once '../pagesFunctions/jobOffer.php';
-            $jobFunctions = getJobFunctions();
-            foreach ($jobFunctions as $jobFunction){
-                echo '<option value="'.$jobFunction['jobfunctionID'].'"> '.$jobFunction['functionName'].' </option>';
-            }
+        require_once '../pagesFunctions/jobOffer.php';
+        $jobFunctions = getJobFunctions();
+        foreach ($jobFunctions as $jobFunction) {
+            echo '<option value="' . $jobFunction['jobfunctionID'] . '"> ' . $jobFunction['functionName'] . ' </option>';
+        }
         ?>
     </select>
     <p>Vacature filiaal</p>
@@ -27,8 +27,8 @@ if (isset($_POST["submit"])) {
         <?php
         require_once '../pagesFunctions/jobOffer.php';
         $jobBranches = getJobBranches();
-        foreach ($jobBranches as $jobBranch){
-            echo '<option value=" '.$jobBranch['jobbranchID'].' "> '.$jobBranch['brancheName'].' </option>';
+        foreach ($jobBranches as $jobBranch) {
+            echo '<option value=" ' . $jobBranch['jobbranchID'] . ' "> ' . $jobBranch['brancheName'] . ' </option>';
         }
         ?>
     </select>

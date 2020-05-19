@@ -14,10 +14,12 @@ function changeOfferStatus($oId)
     exit;
 }
 
+//Function to add an new reaction to an offer
 function offerReaction()
 {
     $db = DBConnection();
 
+    //checks if all fields from the form are correcct
     if (empty($_POST['motivation']) || empty($_FILES['fileToUpload'])) {
         echo "<script>alert('Vergeet niet de verplichte velden in te vullen');</script>";
         exit;
@@ -27,8 +29,7 @@ function offerReaction()
         echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
         exit;
     }
-
-
+    //sets destination for the file
     $target_dir = "../assets/uploads/offerreactions";
     $cv = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
@@ -40,6 +41,7 @@ function offerReaction()
         exit;
     }
 
+    //enters all the data into the database
     $motivation = htmlspecialchars($_POST['motivation']);
     $cv = $_FILES['fileToUpload'];
     $offerId = htmlspecialchars($_POST['offerId']);
@@ -51,17 +53,19 @@ function offerReaction()
     echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
 }
 
+//gets all reactions from an offer
 function getAllReactions($oId)
 {
     $db = DBConnection();
 
-    $sql = "SELECT * FROM offerreaction WHERE idJobOffer =".$oId;
+    $sql = "SELECT * FROM offerreaction WHERE idJobOffer =" . $oId;
     $stmt = $db->prepare($sql);
     $stmt->execute(array());
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+//gets an single reaction from the database
 function getOfferReaction()
 {
     $db = DBConnection();
@@ -73,6 +77,7 @@ function getOfferReaction()
     return $stmt->fetch();
 }
 
+//gets all job offers
 function getAllOffers()
 {
     $db = DBConnection();
@@ -86,6 +91,7 @@ function getAllOffers()
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+//gets an offer with the right ID
 function getOfferById($oId)
 {
     $db = DBConnection();
@@ -97,6 +103,7 @@ function getOfferById($oId)
     return $stmt->fetch();
 }
 
+//gets all functions
 function getJobFunctions()
 {
     $db = DBConnection();
@@ -109,6 +116,7 @@ function getJobFunctions()
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+//gets all branches
 function getJobBranches()
 {
     $db = DBConnection();
@@ -121,10 +129,12 @@ function getJobBranches()
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+//adds a new offer
 function addNewJobOffer()
 {
     $db = DBConnection();
 
+    //checks if everything from the form is correct
     if (empty($_POST['jobName']) || empty($_POST['jobFunction']) || empty($_POST['jobBranch'])) {
         echo "<script>alert('Vergeet niet de verplichte velden in te vullen');</script>";
         echo "<script>window.location.href = '../pagesInclude/addJobOffer.php';</script>";
@@ -137,11 +147,13 @@ function addNewJobOffer()
         exit;
     }
 
+    //gets the data and assigns them to a variable
     $jobName = htmlspecialchars($_POST['jobName']);
     $jobFunction = htmlspecialchars($_POST['jobFunction']);
     $jobBranch = htmlspecialchars($_POST['jobBranch']);
     $jobDescription = htmlspecialchars($_POST['jobDescription']);
 
+    //checks if an file got added to the form, if so puts it in the right place
     if (!empty($jobFile['name'])) {
         $target_dir = "../assets/uploads/joboffers/";
         $jobDescription = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -155,7 +167,7 @@ function addNewJobOffer()
             exit;
         }
     }
-
+//enters everything into the database
     $query = "INSERT INTO joboffer (idJobbranch, idJobfunction, offerName, description )  VALUES ('$jobBranch', '$jobFunction', '$jobName', '$jobDescription')";
     $stmt = $db->prepare($query);
     $stmt->execute();

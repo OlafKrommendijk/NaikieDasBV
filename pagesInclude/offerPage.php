@@ -16,6 +16,7 @@ require_once('header.php');
         require_once '../pagesFunctions/jobOffer.php';
         $offer = getOfferById($oId);
 
+        //Shows if an offer is on or off
         if ($offer['status'] == 1) {
             echo 'Vacature staat aan';
         } else {
@@ -74,30 +75,31 @@ require_once('header.php');
 
     <div class="reactionBox">
 
-    <?php
+        <?php
 
-    $allReactions = getAllReactions($oId);
+        $allReactions = getAllReactions($oId);
 
-    foreach ($allReactions as $offerReaction) {
-        $offerReactionID = $offerReaction['offerReactionID'];
-        echo '<div class="singleReaction">';
-        echo '<a href="download.php">Download CV</a><br>';
-        echo '<a href="./acceptReaction.php?id='.$offerReactionID.'">Accepteren</a><br>';
-        echo '<form method="post"> 
-              <input type="hidden" id="reactionId" name="reactionId" value="'.$offerReactionID.'">
+        //loop through all reactions for this offer and show them so they are easily accepted or rejected.
+        foreach ($allReactions as $offerReaction) {
+            $offerReactionID = $offerReaction['offerReactionID'];
+            echo '<div class="singleReaction">';
+            echo '<a href="download.php">Download CV</a><br>';
+            echo '<a href="./acceptReaction.php?id=' . $offerReactionID . '">Accepteren</a><br>';
+            echo '<form method="post"> 
+              <input type="hidden" id="reactionId" name="reactionId" value="' . $offerReactionID . '">
               <input type="submit" name="button" value="Afwijzen"/> 
               </form> ';
-        echo '</div>';
+            echo '</div>';
 
-        if(isset($_POST['button'])) {
-            require_once '../pagesFunctions/mailFunctions.php';
+            if (isset($_POST['button'])) {
+                require_once '../pagesFunctions/mailFunctions.php';
 
-            $rId = htmlspecialchars($_POST['reactionId']);
-            sendRejectMail($rId);
+                $rId = htmlspecialchars($_POST['reactionId']);
+                sendRejectMail($rId);
+            }
+
         }
 
-    }
-
-    ?>
+        ?>
     </div>
 </div>
