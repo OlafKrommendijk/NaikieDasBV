@@ -52,7 +52,6 @@ function offerReaction()
     $stmt->execute();
     echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
 }
-
 //gets all reactions from an offer
 function getAllReactions($oId)
 {
@@ -64,7 +63,6 @@ function getAllReactions($oId)
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 //gets an single reaction from the database
 function getOfferReaction()
 {
@@ -76,7 +74,6 @@ function getOfferReaction()
 
     return $stmt->fetch();
 }
-
 //gets all job offers
 function getAllOffers()
 {
@@ -90,7 +87,6 @@ function getAllOffers()
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 //gets an offer with the right ID
 function getOfferById($oId)
 {
@@ -102,7 +98,6 @@ function getOfferById($oId)
 
     return $stmt->fetch();
 }
-
 //gets all functions
 function getJobFunctions()
 {
@@ -115,7 +110,6 @@ function getJobFunctions()
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 //gets all branches
 function getJobBranches()
 {
@@ -128,7 +122,6 @@ function getJobBranches()
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 //adds a new offer
 function addNewJobOffer()
 {
@@ -167,7 +160,7 @@ function addNewJobOffer()
             exit;
         }
     }
-//enters everything into the database
+    //enters everything in database
     $query = "INSERT INTO joboffer (idJobbranch, idJobfunction, offerName, description )  VALUES ('$jobBranch', '$jobFunction', '$jobName', '$jobDescription')";
     $stmt = $db->prepare($query);
     $stmt->execute();

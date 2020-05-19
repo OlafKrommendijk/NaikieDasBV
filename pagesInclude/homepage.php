@@ -1,7 +1,5 @@
 <?php
-session_start();
-include 'header.php';
-
+include_once('header.php');
 var_dump($_SESSION);
 ?>
 <head>
@@ -31,6 +29,7 @@ var_dump($_SESSION);
             <option value="branch">Filiaal</option>
             <option value="job">Functie</option>
         </select>
+
         <!--if (isset($_SESSION["manager"])) {-->
         <?php
         echo '<br>

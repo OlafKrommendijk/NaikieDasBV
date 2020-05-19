@@ -1,6 +1,5 @@
 <?php
-session_start();
-include 'header.php';
+include_once('header.php');
 
 require_once '../pagesFunctions/jobOffer.php';
 if (isset($_POST["submit"])) {

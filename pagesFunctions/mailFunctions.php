@@ -2,6 +2,7 @@
 
 function sendAcceptMail($rId)
 {
+    include '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
     $query = "SELECT * FROM offerreaction WHERE offerReactionID = $rId";
@@ -52,6 +53,7 @@ function sendAcceptMail($rId)
 }
 
 function sendRejectMail($rId){
+    include '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
     //select the right email and offer from db

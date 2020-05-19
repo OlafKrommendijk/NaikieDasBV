@@ -1,5 +1,5 @@
 <?php
-require_once '../pagesInclude/DBconfig.php';
+include '../pagesInclude/DBconfig.php';
 $db = DBConnection();
 
 //Gets data from from
