@@ -1,4 +1,5 @@
 <?php
+//error_reporting(0);
 session_start();
 require_once('header.php');
 ?>
@@ -15,9 +16,9 @@ require_once('header.php');
         require_once '../pagesFunctions/jobOffer.php';
         $offer = getOfferById($oId);
 
-        if ($offer['status'] == 1){
+        if ($offer['status'] == 1) {
             echo 'Vacature staat aan';
-        }else{
+        } else {
             echo 'Vacature staat uit';
         }
 
@@ -51,7 +52,7 @@ require_once('header.php');
     echo '</div>';
     echo '</div>';
 
-    require_once '../pagesFunctions/jobOffer.php';
+
     $jobOfferId = $offer['jobofferID'];
 
     if (isset($_POST['submit'])) {
@@ -67,8 +68,25 @@ require_once('header.php');
         <p>Motivatie</p>
         <input title="motivation" type="text" name="motivation" id="motivation">
         <br>
-        <input type="hidden" id="offerId" name="offerId" value="<?php echo $jobOfferId;?>">
+        <input type="hidden" id="offerId" name="offerId" value="<?php echo $jobOfferId; ?>">
         <input type="submit" value="Verstuur" name="submit">
     </form>
-    
+
+    <div class="reactionBox">
+
+    <?php
+
+    $allReactions = getAllReactions($oId);
+
+    foreach ($allReactions as $offerReaction) {
+        echo '<div class="singleReaction">';
+        echo '<a href="download.php">Download CV</a>';
+        echo $offerReaction['motivation'];
+        echo '<a href="download.php">Accepteren</a>';
+        echo '<a href="download.php">Afwijzen</a>';
+        echo '</div>';
+    }
+
+    ?>
+    </div>
 </div>

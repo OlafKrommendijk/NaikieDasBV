@@ -1,39 +1,12 @@
 <?php
 //Here can you find all the function that have a correlation to job offers
-
-function getAllOffers()
-{
-    require_once '../pagesInclude/DBconfig.php';
-    $db = DBConnection();
-
-
-    $sql = "SELECT * FROM joboffer;";
-    $stmt = $db->prepare($sql);
-    $stmt->execute(array());
-
-
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function getOfferById($oId)
-{
-    require_once '../pagesInclude/DBconfig.php';
-    $db = DBConnection();
-
-    $query = "SELECT * FROM joboffer WHERE jobOfferId = ?";
-    $stmt = $db->prepare($query);
-    $stmt->execute(array($_GET['id']));
-
-    return $stmt->fetch();
-}
-
 function changeOfferStatus($oId)
 {
     $db = DBConnection();
 
     $offerStatus = htmlspecialchars($_POST['status']);
 
-    $query = "UPDATE joboffer SET status = ".$offerStatus." WHERE jobOfferID = ".$oId;
+    $query = "UPDATE joboffer SET status = " . $offerStatus . " WHERE jobOfferID = " . $oId;
     $stmt = $db->prepare($query);
     $stmt->execute();
 
@@ -43,7 +16,6 @@ function changeOfferStatus($oId)
 
 function offerReaction()
 {
-    require_once '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
     if (empty($_POST['motivation']) || empty($_FILES['fileToUpload'])) {
@@ -79,9 +51,43 @@ function offerReaction()
     echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
 }
 
+function getAllReactions($oId)
+{
+    $db = DBConnection();
+
+    $sql = "SELECT * FROM offerreaction WHERE idJobOffer =".$oId;
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array());
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getAllOffers()
+{
+    $db = DBConnection();
+
+
+    $sql = "SELECT * FROM joboffer;";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array());
+
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getOfferById($oId)
+{
+    $db = DBConnection();
+
+    $query = "SELECT * FROM joboffer WHERE jobOfferId = ?";
+    $stmt = $db->prepare($query);
+    $stmt->execute(array($_GET['id']));
+
+    return $stmt->fetch();
+}
+
 function getJobFunctions()
 {
-    require_once '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
 
@@ -94,7 +100,6 @@ function getJobFunctions()
 
 function getJobBranches()
 {
-    require_once '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
 
@@ -107,7 +112,6 @@ function getJobBranches()
 
 function addNewJobOffer()
 {
-    require_once '../pagesInclude/DBconfig.php';
     $db = DBConnection();
 
     if (empty($_POST['jobName']) || empty($_POST['jobFunction']) || empty($_POST['jobBranch'])) {
