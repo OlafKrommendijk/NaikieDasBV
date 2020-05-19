@@ -1,6 +1,9 @@
 <?php
 session_start();
+
 require_once('header.php');
+
+include 'header.php';
 
 var_dump($_SESSION);
 ?>
@@ -35,7 +38,7 @@ var_dump($_SESSION);
         <?php
             echo '<br>
         <div class="buttonShell">
-            <a class="newOfferButton" href=./loggedinHeader.php>Nieuwe vacature toevoegen</a>
+            <a class="newOfferButton" href=./addJobOffer.php>Nieuwe vacature toevoegen</a>
         </div>';
 
         ?>

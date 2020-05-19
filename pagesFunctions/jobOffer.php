@@ -34,7 +34,6 @@ function offerReaction()
 
     if (empty($_POST['motivation']) || empty($_FILES['fileToUpload'])) {
         echo "<script>alert('Vergeet niet de verplichte velden in te vullen');</script>";
-        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
         exit;
     }
     if (!isset($_SESSION['userId'])) {
@@ -52,7 +51,6 @@ function offerReaction()
         echo "<script>alert('bestand is geupload');</script>";
     } else {
         echo "<script>alert('Bestand uploaden mislukt');</script>";
-        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
         exit;
     }
 
@@ -64,6 +62,70 @@ function offerReaction()
     $query = "INSERT INTO offerreaction (idUser, idJoboffer, motivation, cv )  VALUES ('$userId', '$offerId', '$motivation', '$cv')";
     $stmt = $db->prepare($query);
     $stmt->execute();
+    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+}
+
+function getJobFunctions(){
+    require_once '../pagesInclude/DBconfig.php';
+    $db = DBConnection();
 
 
+    $sql = "SELECT * FROM jobfunction;";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array());
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getJobBranches(){
+    require_once '../pagesInclude/DBconfig.php';
+    $db = DBConnection();
+
+
+    $sql = "SELECT * FROM jobbranch;";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array());
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function addNewJobOffer(){
+    require_once '../pagesInclude/DBconfig.php';
+    $db = DBConnection();
+
+    if (empty($_POST['jobName']) || empty($_POST['jobFunction']) || empty($_POST['jobBranch'])) {
+        echo "<script>alert('Vergeet niet de verplichte velden in te vullen');</script>";
+        echo "<script>window.location.href = '../pagesInclude/addJobOffer.php';</script>";
+        exit;
+    }
+    $jobFile = $_FILES['fileToUpload'];
+    if ((!empty($_POST['jobDescription'])) && !empty($jobFile['name'])){
+        echo "<script>alert('Voeg of alleen een bestand toe of schrijf alleen een beschrijving');</script>";
+        echo "<script>window.location.href = '../pagesInclude/addJobOffer.php';</script>";
+        exit;
+    }
+
+    $jobName = htmlspecialchars($_POST['jobName']);
+    $jobFunction = htmlspecialchars($_POST['jobFunction']);
+    $jobBranch = htmlspecialchars($_POST['jobBranch']);
+    $jobDescription = htmlspecialchars($_POST['jobDescription']);
+
+    if (!empty($jobFile['name'])) {
+        $target_dir = "../assets/uploads/joboffers/";
+        $jobDescription = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+
+        //Trying to upload file
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $jobDescription)) {
+            echo "<script>alert('bestand is geupload');</script>";
+        } else {
+            echo "<script>alert('Bestand uploaden mislukt');</script>";
+            echo "<script>window.location.href = '../pagesInclude/addJobOffer.php';</script>";
+            exit;
+        }
+    }
+
+    $query = "INSERT INTO joboffer (idJobbranch, idJobfunction, offerName, description )  VALUES ('$jobBranch', '$jobFunction', '$jobName', '$jobDescription')";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
 }
