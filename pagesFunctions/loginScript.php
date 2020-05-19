@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
 
 
 //here we create an sql statement that will search in the database for the email that matches the form first searching with managers
-    $sql = "SELECT * FROM manager WHERE email = ?";
+    $sql = "SELECT * FROM manager WHERE manEmail = ?";
     $stmt = $db->prepare($sql);
     $stmt->execute(array($email));
     $resultManager = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -28,10 +28,10 @@ if (isset($_POST["submit"])) {
             $_SESSION["email"] = $resultManager["manEmail"];
             $_SESSION["status"] = 1;
             $_SESSION["manager"] = 1;
-            $_SESSION['userId']=$resultManager["managerID"];
+            $_SESSION["loggedIn"] = 1;
+            $_SESSION["userId"]=$resultManager["managerID"];
 
             echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-            exit;
         }
     }else {
         //here we try for normal user
@@ -48,10 +48,10 @@ if (isset($_POST["submit"])) {
             if (password_verify($password, $hash)) {
                 $_SESSION["email"] = $result["email"];
                 $_SESSION["status"] = 1;
-                $_SESSION['userId'] = $result["userID"];
+                $_SESSION["userId"] = $result["userID"];
+                $_SESSION["loggedIn"] = 1;
 
                 echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-                exit;
             }
         }
     }

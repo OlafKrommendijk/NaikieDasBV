@@ -1,5 +1,7 @@
 <?php
-require_once('header.php')
+require_once('header.php');
+
+var_dump($_SESSION);
 ?>
 <head>
     <link rel="stylesheet" href="../assets/css/homepageStyle.css">
@@ -28,13 +30,13 @@ require_once('header.php')
             <option value="branch">Filiaal</option>
             <option value="job">Functie</option>
         </select>
-
-        <?php if (isset($_SESSION["manager"])) {
+<!--if (isset($_SESSION["manager"])) {-->
+        <?php
             echo '<br>
         <div class="buttonShell">
             <a class="newOfferButton" href=./loggedinHeader.php>Nieuwe vacature toevoegen</a>
         </div>';
-        }
+
         ?>
     </div>
 

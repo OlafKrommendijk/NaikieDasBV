@@ -44,7 +44,7 @@ function offerReaction()
     }
 
 
-    $target_dir = "../assets/uploads/";
+    $target_dir = "../assets/uploads/offerreactions";
     $cv = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
     //Trying to upload file
