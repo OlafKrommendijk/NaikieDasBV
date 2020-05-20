@@ -6,12 +6,6 @@ $oId = $_GET['id'];
 require_once '../pagesFunctions/jobOffer.php';
 $offer = getOfferById($oId);
 
-if ($offer['status'] = 0)
-{
-    if (isset($_SESSION["manager"])){
-        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-    }
-}
 ?>
 
 <head>
@@ -22,19 +16,20 @@ if ($offer['status'] = 0)
 <div id="page-wrapper">
     <div class="offerStatus">
         <?php
-        //Shows if an offer is on or off
-        if ($offer['status'] == 1) {
-            echo 'Vacature staat aan';
-        } else {
-            echo 'Vacature staat uit';
-        }
+        if (isset($_SESSION["MANAGER"])) {
+            //Shows if an offer is on or off
+            if ($offer['status'] == 1) {
+                echo 'Vacature staat aan';
+            } else {
+                echo 'Vacature staat uit';
+            }
 
-        if (isset($_POST['changeStatus'])) {
-            changeOfferStatus($oId);
-        }
-        ?>
+            if (isset($_POST['changeStatus'])) {
+                changeOfferStatus($oId);
+            }
 
-        <form action="" method="post" enctype="multipart/form-data">
+
+        echo '<form action="" method="post" enctype="multipart/form-data">
             <label for="status">Kies een status:</label>
             <br>
             <select id="status" name="status">
@@ -43,9 +38,10 @@ if ($offer['status'] = 0)
             </select>
             <br>
             <input type="submit" value="Bijwerken!" name="changeStatus">
-        </form>
-    </div>
-
+            </form>
+            </div>';
+    }
+    ?>
     <?php
 
     echo '<div class="offerBox">';
@@ -82,28 +78,29 @@ if ($offer['status'] = 0)
     <div class="reactionBox">
 
         <?php
+        if (isset($_SESSION["MANAGER"])) {
+            $allReactions = getAllReactions($oId);
 
-        $allReactions = getAllReactions($oId);
-
-        //loop through all reactions for this offer and show them so they are easily accepted or rejected.
-        foreach ($allReactions as $offerReaction) {
-            $offerReactionID = $offerReaction['offerReactionID'];
-            echo '<div class="singleReaction">';
-            echo '<a href="download.php">Download CV</a><br>';
-            echo '<a href="./acceptReaction.php?id=' . $offerReactionID . '">Accepteren</a><br>';
-            echo '<form method="post"> 
+            //loop through all reactions for this offer and show them so they are easily accepted or rejected.
+            foreach ($allReactions as $offerReaction) {
+                $offerReactionID = $offerReaction['offerReactionID'];
+                echo '<div class="singleReaction">';
+                echo '<a href="download.php">Download CV</a><br>';
+                echo '<a href="./acceptReaction.php?id=' . $offerReactionID . '">Accepteren</a><br>';
+                echo '<form method="post"> 
               <input type="hidden" id="reactionId" name="reactionId" value="' . $offerReactionID . '">
               <input type="submit" name="button" value="Afwijzen"/> 
               </form> ';
-            echo '</div>';
+                echo '</div>';
 
-            if (isset($_POST['button'])) {
-                require_once '../pagesFunctions/mailFunctions.php';
+                if (isset($_POST['button'])) {
+                    require_once '../pagesFunctions/mailFunctions.php';
 
-                $rId = htmlspecialchars($_POST['reactionId']);
-                sendRejectMail($rId);
+                    $rId = htmlspecialchars($_POST['reactionId']);
+                    sendRejectMail($rId);
+                }
+
             }
-
         }
 
         ?>

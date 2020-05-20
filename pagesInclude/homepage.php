@@ -32,7 +32,7 @@ include 'header.php';
 
 
         <?php
-        if (isset($_SESSION["MANAGER"]) && $_SESSION["ID"] = 1){
+        if (isset($_SESSION["MANAGER"])){
             echo '<br>
                   <div class="buttonShell">
                   <a class="newOfferButton" href="addJobOffer.php">Nieuwe vacature toevoegen</a>

@@ -2,6 +2,10 @@
 include 'DBconfig.php';
 include 'header.php';
 
+if (!isset($_SESSION["MANAGER"])){
+    echo "<script>window.location.href = 'homepage.php';</script>";
+}
+
 require_once '../pagesFunctions/jobOffer.php';
 if (isset($_POST["submit"])) {
     addNewJobOffer();
