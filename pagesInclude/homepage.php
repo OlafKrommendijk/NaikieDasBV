@@ -32,7 +32,7 @@ include 'header.php';
 
 
         <?php
-        if (isset($_SESSION["MANAGER"])){
+        if (isset($_SESSION["MANAGER"])) {
             echo '<br>
                   <div class="buttonShell">
                   <a class="newOfferButton" href="addJobOffer.php">Nieuwe vacature toevoegen</a>
@@ -45,15 +45,25 @@ include 'header.php';
     <div class="right-bar">
         <div class="offers">
             <?php
-            //gets all offers and shows them
+            //gets all offers and shows them, normal user can only see offers that are "on" managers are able to see offers that are "off"
             require_once '../pagesFunctions/jobOffer.php';
 
             $offers = getAllOffers();
             foreach ($offers as $offer) {
-                echo '<div class="offer">';
-                echo '<a href="./offerpage.php?id=' . $offer["jobofferID"] . '">';
-                echo $offer['offerName'];
-                echo '</div>';
+                if (isset($_SESSION["MANAGER"])) {
+                    if ($offer['status'] == 0) {
+                        echo '<div class="offer">';
+                        echo '<a href="./offerpage.php?id=' . $offer["jobofferID"] . '">';
+                        echo $offer['offerName'];
+                        echo '</div>';
+                    }
+                }
+                if ($offer['status'] == 1) {
+                    echo '<div class="offer">';
+                    echo '<a href="./offerpage.php?id=' . $offer["jobofferID"] . '">';
+                    echo $offer['offerName'];
+                    echo '</div>';
+                }
             }
             ?>
 
