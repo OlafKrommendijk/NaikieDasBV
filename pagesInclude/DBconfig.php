@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 DEFINE("DB_USER", "root");
 DEFINE("DB_PASS", "");
 

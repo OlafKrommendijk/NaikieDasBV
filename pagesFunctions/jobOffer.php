@@ -34,13 +34,14 @@ function offerReaction()
     $cv = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
     //Trying to upload file
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $cv)) {
 
-        if (file_exists($cv)) {
-            echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
-            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-            exit;
-        } else {
+
+    if (file_exists($cv)) {
+        echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
+        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+        exit;
+    } else {
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $cv)) {
 
             echo "<script>alert('bestand is geupload');</script>";
 
@@ -53,11 +54,11 @@ function offerReaction()
             $stmt = $db->prepare($query);
             $stmt->execute();
             echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+        } else {
+            echo "<script>alert('Bestand uploaden mislukt');</script>";
+            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+            exit;
         }
-    } else {
-        echo "<script>alert('Bestand uploaden mislukt');</script>";
-        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-        exit;
     }
 }
 
@@ -166,12 +167,13 @@ function addNewJobOffer()
         $jobDescription = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
         //Trying to upload file
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $jobDescription)) {
-            if (file_exists($jobDescription)) {
-                echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
-                echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-                exit;
-            } else {
+
+        if (file_exists($jobDescription)) {
+            echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
+            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+            exit;
+        } else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $jobDescription)) {
                 //enters everything in database
                 $query = "INSERT INTO joboffer (idJobbranch, idJobfunction, offerName, description )  VALUES ('$jobBranch', '$jobFunction', '$jobName', '$jobDescription')";
                 $stmt = $db->prepare($query);
@@ -179,12 +181,13 @@ function addNewJobOffer()
                 echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
                 echo "<script>alert('bestand is geupload');</script>";
                 exit;
+            } else {
+                echo "<script>alert('Bestand uploaden mislukt');</script>";
+                echo "<script>window.location.href = '../pagesInclude/addJobOffer.php';</script>";
+                exit;
             }
-        } else {
-            echo "<script>alert('Bestand uploaden mislukt');</script>";
-            echo "<script>window.location.href = '../pagesInclude/addJobOffer.php';</script>";
-            exit;
         }
+
     }
     //enters everything in database
     $query = "INSERT INTO joboffer (idJobbranch, idJobfunction, offerName, description )  VALUES ('$jobBranch', '$jobFunction', '$jobName', '$jobDescription')";
