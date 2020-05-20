@@ -1,8 +1,6 @@
 <?php
 include 'DBconfig.php';
 include 'header.php';
-
-var_dump($_SESSION);
 ?>
 <head>
     <link rel="stylesheet" href="../assets/css/homepageStyle.css">
@@ -32,12 +30,14 @@ var_dump($_SESSION);
             <option value="job">Functie</option>
         </select>
 
-        <!--if (isset($_SESSION["manager"])) {-->
+
         <?php
-        echo '<br>
-        <div class="buttonShell">
-            <a class="newOfferButton" href=./addJobOffer.php>Nieuwe vacature toevoegen</a>
-        </div>';
+        if (isset($_SESSION["MANAGER"]) && $_SESSION["ID"] = 1){
+            echo '<br>
+                  <div class="buttonShell">
+                  <a class="newOfferButton" href="addJobOffer.php">Nieuwe vacature toevoegen</a>
+                  </div>';
+        }
 
         ?>
     </div>

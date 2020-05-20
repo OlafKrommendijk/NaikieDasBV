@@ -28,6 +28,7 @@ if (isset($_POST["submit"])) {
             $_SESSION["ID"] = 2;
             $_SESSION["EMAIL"] = $resultManager["manEmail"];
             $_SESSION["STATUS"] = 1;
+            $_SESSION["MANAGER"] = 1;
             echo "<script>location.href = '../pagesInclude/homepage.php';</script>";
         }
     }else {

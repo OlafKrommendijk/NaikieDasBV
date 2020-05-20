@@ -14,11 +14,13 @@
                         echo '<li>';
                         echo '<a class="loginButton" href="../pagesFunctions/logoutScript.php">Uitloggen</a>';
                         echo '</li>';
+                    }else{
+                        echo '<li>';
+                        echo '<a class="loginButton" href="loginPage.php">Inloggen</a>';
+                        echo '</li>';
                     }
                 ?>
-                <li>
-                    <a class="loginButton" href="loginPage.php">Inloggen</a>
-                </li>
+
                 <li>
                     <a class="homepageButton" href="homepage.php">HomePage</a>
                 </li>
