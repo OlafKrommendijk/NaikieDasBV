@@ -26,7 +26,7 @@ if (isset($_POST["submit"])) {
         }
         ?>
     </select>
-    <p>Vacature filiaal</p>
+    <p>Vacature Branch</p>
     <select title="jobBranch" name="jobBranch" id="jobBranch">
         <?php
         require_once '../pagesFunctions/jobOffer.php';
