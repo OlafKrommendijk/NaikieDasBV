@@ -68,7 +68,7 @@ $offer = getOfferById($oId);
 
         $jobOfferId = $offer['jobofferID'];
 
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['addOfferReaction'])) {
             offerReaction();
         }
         ?>
@@ -84,8 +84,8 @@ $offer = getOfferById($oId);
                 <p>Motivatie</p>
                 <input title="motivation" type="text" name="motivation" id="motivation">
                 <br>
-                <input type="hidden" id="offerId" name="offerId" value="<?php echo $jobOfferId; ?>">
-                <input type="submit" value="Verstuur" name="submit">
+                <input type="hidden" id="offerId" name="offerId" value="'.$jobOfferId.'">
+                <input type="submit" value="Verstuur" name="addOfferReaction">
             </form>
         <div class="reactionBox">';
         }

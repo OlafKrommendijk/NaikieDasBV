@@ -12,11 +12,12 @@ function offerReaction()
     //checks if all fields from the form are correcct
     if (empty($_POST['motivation']) || empty($_FILES['fileToUpload'])) {
         echo "<script>alert('Vergeet niet de verplichte velden in te vullen');</script>";
+        echo "<script>window.location.href = 'homepage.php';</script>";
         exit;
     }
     if (!isset($_SESSION['STATUS'])) {
         echo "<script>alert('U moet ingelogd zijn');</script>";
-        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+        echo "<script>window.location.href = 'homepage.php';</script>";
         exit;
     }
     //sets destination for the file
@@ -24,31 +25,25 @@ function offerReaction()
     $cv = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
     //Trying to upload file
+//    if (file_exists($cv)) {
+//        echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
+//        echo "<script>window.location.href = 'homepage.php';</script>";
+//        exit;
+//    }
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $cv)) {
+        //enters all the data into the database
+        $motivation = htmlspecialchars($_POST['motivation']);
+        $offerId = htmlspecialchars($_POST['offerId']);
+        $userId = $_SESSION['USERID'];
 
+        var_dump($offerId);
 
-    if (file_exists($cv)) {
-        echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
-        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+        $query = "INSERT INTO offerreaction (idUser, idJoboffer, motivation, cv )  VALUES ('$userId', '$offerId', '$motivation', '$cv')";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        echo "<script>alert('bestand is geupload');</script>";
+        echo "<script>window.location.href = 'homepage.php';</script>";
         exit;
-    } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $cv)) {
-
-            echo "<script>alert('bestand is geupload');</script>";
-
-            //enters all the data into the database
-            $motivation = htmlspecialchars($_POST['motivation']);
-            $offerId = htmlspecialchars($_POST['offerId']);
-            $userId = $_SESSION['USERID'];
-
-            $query = "INSERT INTO offerreaction (idUser, idJoboffer, motivation, cv )  VALUES ('$userId', '$offerId', '$motivation', '$cv')";
-            $stmt = $db->prepare($query);
-            $stmt->execute();
-            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-        } else {
-            echo "<script>alert('Bestand uploaden mislukt');</script>";
-            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-            exit;
-        }
     }
 }
 
