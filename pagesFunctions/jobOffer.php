@@ -198,3 +198,16 @@ function addNewJobOffer()
     echo "<script>alert('bestand is geupload');</script>";
     exit;
 }
+
+function deleteJobOffer($oId)
+{
+    //deletes an offer from DB
+    include '../pagesInclude/DBconfig.php';
+
+    $query = "DELETE FROM joboffer WHERE jobOfferID = " . $oId;
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+
+    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+    exit;
+}

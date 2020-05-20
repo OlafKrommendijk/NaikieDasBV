@@ -27,8 +27,9 @@ $offer = getOfferById($oId);
             if (isset($_POST['changeStatus'])) {
                 changeOfferStatus($oId);
             }
-
-
+            if (isset($_POST['deleteOffer'])) {
+                deleteJobOffer($oId);
+            }
             echo '<form action="" method="post" enctype="multipart/form-data">
             <label for="status">Kies een status:</label>
             <br>
@@ -40,6 +41,10 @@ $offer = getOfferById($oId);
             <input type="submit" value="Bijwerken!" name="changeStatus">
             </form>
             </div>';
+
+            echo '<form action="" method="post" enctype="multipart/form-data">
+                    <input type="submit" value="Verwijderen!" name="deleteOffer">
+                  </form>';
         }
         ?>
         <?php
