@@ -1,5 +1,6 @@
 <?php
-include_once('header.php');
+include 'DBconfig.php';
+include 'header.php';
 ?>
     <head>
         <link rel="stylesheet" href="../assets/css/header.css">
@@ -30,7 +31,3 @@ include_once('header.php');
         </form>
     </div>
     </body>
-
-<?php
-require_once('../pagesFunctions/loginScript.php');
-?>

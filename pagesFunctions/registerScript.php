@@ -1,6 +1,5 @@
 <?php
 include '../pagesInclude/DBconfig.php';
-$db = DBConnection();
 
 //Gets data from from
 if (isset($_POST["submit"])) {

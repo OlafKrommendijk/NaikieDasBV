@@ -1,5 +1,7 @@
 <?php
-include_once('header.php');
+include 'DBconfig.php';
+include 'header.php';
+
 $oId = $_GET['id'];
 require_once '../pagesFunctions/jobOffer.php';
 $offer = getOfferById($oId);

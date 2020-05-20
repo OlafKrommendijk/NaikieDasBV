@@ -2,7 +2,7 @@
 //Here can you find all the function that have a correlation to job offers
 function changeOfferStatus($oId)
 {
-    $db = DBConnection();
+    include '../pagesInclude/DBconfig.php';
 
     $offerStatus = htmlspecialchars($_POST['status']);
 
@@ -17,7 +17,7 @@ function changeOfferStatus($oId)
 //Function to add an new reaction to an offer
 function offerReaction()
 {
-    $db = DBConnection();
+    include '../pagesInclude/DBconfig.php';
 
     //checks if all fields from the form are correcct
     if (empty($_POST['motivation']) || empty($_FILES['fileToUpload'])) {
@@ -52,10 +52,11 @@ function offerReaction()
     $stmt->execute();
     echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
 }
+
 //gets all reactions from an offer
 function getAllReactions($oId)
 {
-    $db = DBConnection();
+    include '../pagesInclude/DBconfig.php';
 
     $sql = "SELECT * FROM offerreaction WHERE idJobOffer =" . $oId;
     $stmt = $db->prepare($sql);
@@ -63,10 +64,11 @@ function getAllReactions($oId)
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //gets an single reaction from the database
 function getOfferReaction()
 {
-    $db = DBConnection();
+    include '../pagesInclude/DBconfig.php';
 
     $query = "SELECT * FROM offerreaction WHERE offerReactionID = ?";
     $stmt = $db->prepare($query);
@@ -74,11 +76,11 @@ function getOfferReaction()
 
     return $stmt->fetch();
 }
+
 //gets all job offers
 function getAllOffers()
 {
-    $db = DBConnection();
-
+    include '../pagesInclude/DBconfig.php';
 
     $sql = "SELECT * FROM joboffer;";
     $stmt = $db->prepare($sql);
@@ -87,10 +89,11 @@ function getAllOffers()
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //gets an offer with the right ID
 function getOfferById($oId)
 {
-    $db = DBConnection();
+    include '../pagesInclude/DBconfig.php';
 
     $query = "SELECT * FROM joboffer WHERE jobOfferId = ?";
     $stmt = $db->prepare($query);
@@ -98,10 +101,11 @@ function getOfferById($oId)
 
     return $stmt->fetch();
 }
+
 //gets all functions
 function getJobFunctions()
 {
-    $db = DBConnection();
+    include '../pagesInclude/DBconfig.php';;
 
 
     $sql = "SELECT * FROM jobfunction;";
@@ -110,10 +114,11 @@ function getJobFunctions()
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //gets all branches
 function getJobBranches()
 {
-    $db = DBConnection();
+    include '../pagesInclude/DBconfig.php';
 
 
     $sql = "SELECT * FROM jobbranch;";
@@ -122,10 +127,11 @@ function getJobBranches()
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 //adds a new offer
 function addNewJobOffer()
 {
-    $db = DBConnection();
+    include '../pagesInclude/DBconfig.php';
 
     //checks if everything from the form is correct
     if (empty($_POST['jobName']) || empty($_POST['jobFunction']) || empty($_POST['jobBranch'])) {

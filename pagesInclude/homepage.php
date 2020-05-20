@@ -1,5 +1,7 @@
 <?php
-include_once('header.php');
+include 'DBconfig.php';
+include 'header.php';
+
 var_dump($_SESSION);
 ?>
 <head>

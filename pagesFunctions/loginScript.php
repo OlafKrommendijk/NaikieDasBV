@@ -1,13 +1,13 @@
 <?php
 include '../pagesInclude/DBconfig.php';
-$db = DBConnection();
 $error = " ";
+
 
 if (isset($_POST["submit"])) {
 //checks if the form email is filled in
     if (empty($_POST['email']) || empty($_POST['password'])) {
         echo "<script>alert('Inloggegevens ongeldig!');</script>";
-        echo "<script>window.location.href = '../pagesInclude/loginPage.php';</script>";
+        echo "<script>location.href = '../pagesInclude/loginPage.php';</script>";
         exit;
     }
     $email = htmlspecialchars($_POST["email"]);
@@ -25,13 +25,10 @@ if (isset($_POST["submit"])) {
         $hash = $resultManager["manPassword"];
         //If the password is right we send them through
         if (password_verify($password, $hash)) {
-            $_SESSION["email"] = $resultManager["manEmail"];
-            $_SESSION["status"] = 1;
-            $_SESSION["manager"] = 1;
-            $_SESSION["loggedIn"] = 1;
-            $_SESSION["userId"]=$resultManager["managerID"];
-
-            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+            $_SESSION["ID"] = 2;
+            $_SESSION["EMAIL"] = $resultManager["manEmail"];
+            $_SESSION["STATUS"] = 1;
+            echo "<script>location.href = '../pagesInclude/homepage.php';</script>";
         }
     }else {
         //here we try for normal user
@@ -40,29 +37,19 @@ if (isset($_POST["submit"])) {
         $stmt->execute(array($email));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
 //If we have an result we will check if the password matches
         if ($result) {
             $hash = $result["password"];
             //If the password is right we send them through
             if (password_verify($password, $hash)) {
-                $_SESSION["email"] = $result["email"];
-                $_SESSION["status"] = 1;
-                $_SESSION["userId"] = $result["userID"];
-                $_SESSION["loggedIn"] = 1;
-
-                echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+                $_SESSION["ID"] = 1;
+                $_SESSION["EMAIL"] = $result["email"];
+                $_SESSION["STATUS"] = 1;
+                echo "<script>location.href = '../pagesInclude/homepage.php';</script>";
             }
         }
     }
     echo "<script>alert('Inloggegevens ongeldig!');</script>";
-    echo "<script>window.location.href = '../pagesInclude/loginPage.php';</script>";
+    echo "<script>location.href = '../pagesInclude/loginPage.php';</script>";
 }
 
-function logout()
-{
-    require_once '../pagesInclude/header.php';
-    session_destroy();
-    header("Location: ../index.php");
-    exit;
-}

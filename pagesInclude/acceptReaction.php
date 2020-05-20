@@ -1,5 +1,7 @@
 <?php
-require_once('header.php');
+include 'DBconfig.php';
+include 'header.php';
+
 $rId = $_GET['id'];
 require_once '../pagesFunctions/jobOffer.php';
 $reaction = getOfferReaction();
