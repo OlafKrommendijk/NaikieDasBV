@@ -19,14 +19,14 @@ include 'header.php';
         <label for="categorise">Categoriseer:</label>
         <br>
         <select id="categorise">
-            <option value="branch">Filiaal</option>
+            <option value="branch">Branch</option>
             <option value="job">Functie</option>
         </select>
         <br>
         <label for="filter">Filter:</label>
         <br>
         <select id="filter">
-            <option value="branch">Filiaal</option>
+            <option value="branch">Branch</option>
             <option value="job">Functie</option>
         </select>
 
