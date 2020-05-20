@@ -84,8 +84,9 @@ $offer = getOfferById($oId);
             //loop through all reactions for this offer and show them so they are easily accepted or rejected.
             foreach ($allReactions as $offerReaction) {
                 $offerReactionID = $offerReaction['offerReactionID'];
+                $cvLocation = $offerReaction['cv'];
                 echo '<div class="singleReaction">';
-                echo '<a href="download.php">Download CV</a><br>';
+                    echo '<a href="'.$cvLocation.'" download="cv'.$offerReactionID.'">Download CV</a><br>';
                 echo '<a href="./acceptReaction.php?id=' . $offerReactionID . '">Accepteren</a><br>';
                 echo '<form method="post"> 
               <input type="hidden" id="reactionId" name="reactionId" value="' . $offerReactionID . '">

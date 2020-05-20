@@ -30,7 +30,7 @@ function offerReaction()
         exit;
     }
     //sets destination for the file
-    $target_dir = "../assets/uploads/offerreactions";
+    $target_dir = "../assets/uploads/offerreactions/";
     $cv = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
     //Trying to upload file
