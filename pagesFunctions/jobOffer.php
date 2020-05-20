@@ -25,11 +25,11 @@ function offerReaction()
     $cv = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
     //Trying to upload file
-//    if (file_exists($cv)) {
-//        echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
-//        echo "<script>window.location.href = 'homepage.php';</script>";
-//        exit;
-//    }
+    if (file_exists($cv)) {
+        echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
+        echo "<script>window.location.href = 'homepage.php';</script>";
+        exit;
+    }
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $cv)) {
         //enters all the data into the database
         $motivation = htmlspecialchars($_POST['motivation']);
@@ -122,6 +122,7 @@ function getJobBranches()
 
 function changeOfferStatus($oId)
 {
+    //sets offer status to online or offline
     include '../pagesInclude/DBconfig.php';
 
     $offerStatus = htmlspecialchars($_POST['status']);

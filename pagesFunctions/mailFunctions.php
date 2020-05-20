@@ -4,6 +4,7 @@ function sendAcceptMail($rId)
 {
     include '../pagesInclude/DBconfig.php';
 
+    //select the right offerReaction from DB using the right options
     $query = "SELECT * FROM offerreaction WHERE offerReactionID = $rId";
     $stmt = $db->prepare($query);
     $stmt->execute();
