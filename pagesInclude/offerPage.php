@@ -1,5 +1,15 @@
 <?php
 include_once('header.php');
+$oId = $_GET['id'];
+require_once '../pagesFunctions/jobOffer.php';
+$offer = getOfferById($oId);
+
+if ($offer['status'] = 0)
+{
+    if (isset($_SESSION["manager"])){
+        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+    }
+}
 ?>
 
 <head>
@@ -10,10 +20,6 @@ include_once('header.php');
 <div id="page-wrapper">
     <div class="offerStatus">
         <?php
-        $oId = $_GET['id'];
-        require_once '../pagesFunctions/jobOffer.php';
-        $offer = getOfferById($oId);
-
         //Shows if an offer is on or off
         if ($offer['status'] == 1) {
             echo 'Vacature staat aan';
