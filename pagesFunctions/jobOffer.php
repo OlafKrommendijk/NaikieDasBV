@@ -1,18 +1,8 @@
 <?php
 //Here can you find all the function that have a correlation to job offers
-function changeOfferStatus($oId)
-{
-    include '../pagesInclude/DBconfig.php';
+//The file starts with all functions that are used for user reactions
+//This is followed by all functions that are getting used for the offers
 
-    $offerStatus = htmlspecialchars($_POST['status']);
-
-    $query = "UPDATE joboffer SET status = " . $offerStatus . " WHERE jobOfferID = " . $oId;
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-
-    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-    exit;
-}
 
 //Function to add an new reaction to an offer
 function offerReaction()
@@ -135,6 +125,20 @@ function getJobBranches()
     $stmt->execute(array());
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function changeOfferStatus($oId)
+{
+    include '../pagesInclude/DBconfig.php';
+
+    $offerStatus = htmlspecialchars($_POST['status']);
+
+    $query = "UPDATE joboffer SET status = " . $offerStatus . " WHERE jobOfferID = " . $oId;
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+
+    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+    exit;
 }
 
 //adds a new offer
