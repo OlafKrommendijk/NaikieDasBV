@@ -35,17 +35,25 @@ function offerReaction()
 
     //Trying to upload file
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $cv)) {
-        echo "<script>alert('bestand is geupload');</script>";
 
-        //enters all the data into the database
-        $motivation = htmlspecialchars($_POST['motivation']);
-        $offerId = htmlspecialchars($_POST['offerId']);
-        $userId = $_SESSION['USERID'];
+        if (file_exists($cv)) {
+            echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
+            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+            exit;
+        } else {
 
-        $query = "INSERT INTO offerreaction (idUser, idJoboffer, motivation, cv )  VALUES ('$userId', '$offerId', '$motivation', '$cv')";
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+            echo "<script>alert('bestand is geupload');</script>";
+
+            //enters all the data into the database
+            $motivation = htmlspecialchars($_POST['motivation']);
+            $offerId = htmlspecialchars($_POST['offerId']);
+            $userId = $_SESSION['USERID'];
+
+            $query = "INSERT INTO offerreaction (idUser, idJoboffer, motivation, cv )  VALUES ('$userId', '$offerId', '$motivation', '$cv')";
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+        }
     } else {
         echo "<script>alert('Bestand uploaden mislukt');</script>";
         echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
@@ -159,16 +167,24 @@ function addNewJobOffer()
 
         //Trying to upload file
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $jobDescription)) {
-            echo "<script>alert('bestand is geupload');</script>";
+            if (file_exists($jobDescription)) {
+                echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
+                echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+                exit;
+            } else {
+                //enters everything in database
+                $query = "INSERT INTO joboffer (idJobbranch, idJobfunction, offerName, description )  VALUES ('$jobBranch', '$jobFunction', '$jobName', '$jobDescription')";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
+                echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+                echo "<script>alert('bestand is geupload');</script>";
+                exit;
+            }
         } else {
             echo "<script>alert('Bestand uploaden mislukt');</script>";
             echo "<script>window.location.href = '../pagesInclude/addJobOffer.php';</script>";
             exit;
         }
     }
-    //enters everything in database
-    $query = "INSERT INTO joboffer (idJobbranch, idJobfunction, offerName, description )  VALUES ('$jobBranch', '$jobFunction', '$jobName', '$jobDescription')";
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+
 }
