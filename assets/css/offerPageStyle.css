@@ -2,9 +2,12 @@
     width: 100%;
 }
 
-
 .offer{
     width: 94%;
     border: 1px solid black;
     margin: 2%;
+}
+
+.singleReaction{
+    border: 1px solid black;
 }
