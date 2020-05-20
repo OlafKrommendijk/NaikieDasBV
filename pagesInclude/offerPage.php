@@ -68,19 +68,23 @@ $offer = getOfferById($oId);
         }
         ?>
 
-        <form action="" method="post" enctype="multipart/form-data">
-            <h3>Reageren op de vacature</h3>
-            <p>CV</p>
-            <input type="file" name="fileToUpload" id="fileToUpload" accept=".pdf,.doc">
-            <br>
-            <p>Motivatie</p>
-            <input title="motivation" type="text" name="motivation" id="motivation">
-            <br>
-            <input type="hidden" id="offerId" name="offerId" value="<?php echo $jobOfferId; ?>">
-            <input type="submit" value="Verstuur" name="submit">
-        </form>
-
-        <div class="reactionBox">
+        <?php
+            if(!isset($_SESSION["MANAGER"])){
+        echo '
+            <form action="" method="post" enctype="multipart/form-data">
+                <h3>Reageren op de vacature</h3>
+                <p>CV</p>
+                <input type="file" name="fileToUpload" id="fileToUpload" accept=".pdf,.doc">
+                <br>
+                <p>Motivatie</p>
+                <input title="motivation" type="text" name="motivation" id="motivation">
+                <br>
+                <input type="hidden" id="offerId" name="offerId" value="<?php echo $jobOfferId; ?>">
+                <input type="submit" value="Verstuur" name="submit">
+            </form>
+        <div class="reactionBox">';
+        }
+        ?>
 
             <?php
             if (isset($_SESSION["MANAGER"])) {
@@ -89,9 +93,11 @@ $offer = getOfferById($oId);
                 //loop through all reactions for this offer and show them so they are easily accepted or rejected.
                 foreach ($allReactions as $offerReaction) {
                     $offerReactionID = $offerReaction['offerReactionID'];
+                    $offerMotivation = $offerReaction['motivation'];
                     $cvLocation = $offerReaction['cv'];
                     echo '<div class="singleReaction">';
                     echo '<a href="' . $cvLocation . '" download="cv' . $offerReactionID . '">Download CV</a><br>';
+                    echo '<p>'.$offerMotivation.'</p>';
                     echo '<a href="./acceptReaction.php?id=' . $offerReactionID . '">Accepteren</a><br>';
                     echo '<form method="post"> 
                           <input type="hidden" id="reactionId" name="reactionId" value="' . $offerReactionID . '">
