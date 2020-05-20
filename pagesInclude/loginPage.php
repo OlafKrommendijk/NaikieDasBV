@@ -27,7 +27,7 @@ include 'header.php';
         </form>
 
         <form class="registerForm" name="register" method="POST" enctype="multipart/form-data"
-              action="../pagesFunctions/registerScript.php">
+              action="">
             <h3>Registreren</h3>
             <p>Email</p>
             <input required type="email" name="email" placeholder="bij@voorbeeld.com"/>
@@ -38,7 +38,7 @@ include 'header.php';
         </form>
         <?php
         if (isset($_POST['register'])) {
-            include '../pagesFunctions/logoutScript.php';
+            include '../pagesFunctions/registerScript.php';
             include 'DBconfig.php';
             register();
         }

@@ -11,7 +11,7 @@ include 'header.php';
 <div id="page-wrapper">
     <div class="left-bar">
         <p>Zoek een vacature</p>
-        <form action="/action_page.php">
+        <form action="">
             <input type="text" placeholder="Vacature zoeken" name="search">
             <button type="submit">Zoeken</button>
         </form>
