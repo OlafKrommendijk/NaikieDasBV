@@ -36,8 +36,6 @@ function offerReaction()
         $offerId = htmlspecialchars($_POST['offerId']);
         $userId = $_SESSION['USERID'];
 
-        var_dump($offerId);
-
         $query = "INSERT INTO offerreaction (idUser, idJoboffer, motivation, cv )  VALUES ('$userId', '$offerId', '$motivation', '$cv')";
         $stmt = $db->prepare($query);
         $stmt->execute();
@@ -207,6 +205,8 @@ function deleteJobOffer($oId)
     $stmt = $db->prepare($query);
     $stmt->execute();
 
-    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-    exit;
+    var_dump($stmt);
+
+//    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+//    exit;
 }

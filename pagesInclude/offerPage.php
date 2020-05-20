@@ -17,6 +17,7 @@ $offer = getOfferById($oId);
     <div class="offerStatus">
         <?php
         if (isset($_SESSION["MANAGER"])) {
+            $oId = $offer['jobofferID'];
             //Shows if an offer is on or off
             if ($offer['status'] == 1) {
                 echo 'Vacature staat aan';
@@ -35,19 +36,18 @@ $offer = getOfferById($oId);
             <br>
             <select id="status" name="status">
                 <option value="0">Uit</option>
-                <option value="1">Aan</option>
+                <option value="1">Aan</option>  
             </select>
             <br>
             <input type="submit" value="Bijwerken!" name="changeStatus">
-            </form>
-            </div>';
+            </form>';
+
 
             echo '<form action="" method="post" enctype="multipart/form-data">
                     <input type="submit" value="Verwijderen!" name="deleteOffer">
-                  </form>';
+                  </form>
+                  </div>';
         }
-        ?>
-        <?php
 
         echo '<div class="offerBox">';
         echo '<div class="offer">';
