@@ -45,6 +45,7 @@ function sendAcceptMail($rId)
         echo '<script language="javascript">';
         echo 'alert("Uw uitnodiging is verstuurd.")';
         echo '</script>';
+        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
     }catch (PDOException $e) {
         echo $e->getMessage();
         echo("<script>alert('Probleem met email versturen.');</script>");
@@ -93,6 +94,7 @@ function sendRejectMail($rId){
         echo '<script language="javascript">';
         echo 'alert("U hebt iemand afgewezen.")';
         echo '</script>';
+        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
     }catch (PDOException $e) {
         echo $e->getMessage();
         echo("<script>alert('Probleem met email versturen.');</script>");
