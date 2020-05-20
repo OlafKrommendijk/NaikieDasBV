@@ -61,7 +61,6 @@ $offer = getOfferById($oId);
         echo '</div>';
         echo '</div>';
 
-
         $jobOfferId = $offer['jobofferID'];
 
         if (isset($_POST['submit'])) {
@@ -95,9 +94,9 @@ $offer = getOfferById($oId);
                     echo '<a href="' . $cvLocation . '" download="cv' . $offerReactionID . '">Download CV</a><br>';
                     echo '<a href="./acceptReaction.php?id=' . $offerReactionID . '">Accepteren</a><br>';
                     echo '<form method="post"> 
-              <input type="hidden" id="reactionId" name="reactionId" value="' . $offerReactionID . '">
-              <input type="submit" name="button" value="Afwijzen"/> 
-              </form> ';
+                          <input type="hidden" id="reactionId" name="reactionId" value="' . $offerReactionID . '">
+                          <input type="submit" name="button" value="Afwijzen"/> 
+                          </form> ';
                     echo '</div>';
 
                     if (isset($_POST['button'])) {

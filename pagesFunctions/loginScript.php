@@ -1,9 +1,9 @@
 <?php
-include '../pagesInclude/DBconfig.php';
-$error = " ";
 
+function login()
+{
+    include '../pagesInclude/DBconfig.php';
 
-if (isset($_POST["submit"])) {
 //checks if the form email is filled in
     if (empty($_POST['email']) || empty($_POST['password'])) {
         echo "<script>alert('Inloggegevens ongeldig!');</script>";
@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
             $_SESSION["MANAGER"] = 1;
             echo "<script>location.href = '../pagesInclude/homepage.php';</script>";
         }
-    }else {
+    } else {
         //here we try for normal user
         $sql = "SELECT * FROM userTable WHERE email = ?";
         $stmt = $db->prepare($sql);
@@ -46,11 +46,13 @@ if (isset($_POST["submit"])) {
                 $_SESSION["ID"] = 1;
                 $_SESSION["EMAIL"] = $result["email"];
                 $_SESSION["STATUS"] = 1;
+                $_SESSION["USERID"] = $result['userID'];
                 echo "<script>location.href = '../pagesInclude/homepage.php';</script>";
             }
         }
     }
     echo "<script>alert('Inloggegevens ongeldig!');</script>";
     echo "<script>location.href = '../pagesInclude/loginPage.php';</script>";
+    exit;
 }
 

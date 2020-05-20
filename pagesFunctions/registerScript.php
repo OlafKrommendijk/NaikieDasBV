@@ -1,14 +1,15 @@
 <?php
-include '../pagesInclude/DBconfig.php';
 
+function register()
+{
+    include '../pagesInclude/DBconfig.php';
 //Gets data from from
-if (isset($_POST["submit"])) {
     $email = htmlspecialchars($_POST["email"]);
     $password = htmlspecialchars($_POST["password"]);
-    //hashes the password for safety
+//hashes the password for safety
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    //Checks if an right email is entered and checks if it already exists in DB
+//Checks if an right email is entered and checks if it already exists in DB
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $checkedEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
         $sql = "SELECT * FROM userTable WHERE email = ?";
@@ -34,4 +35,5 @@ if (isset($_POST["submit"])) {
         }
     }
 }
+
 ?>

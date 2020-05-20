@@ -8,7 +8,7 @@ include 'header.php';
     </head>
 
     <div id="page-wrapper">
-        <form name="login" method="POST" enctype="multipart/form-data" action="../pagesFunctions/loginScript.php"
+        <form name="login" method="POST" enctype="multipart/form-data" action=""
               accept-charset="UTF-8">
             <h3>Inloggen</h3>
             <p>Email</p>
@@ -16,7 +16,14 @@ include 'header.php';
             <p>Wachtwoord</p>
             <input required type="password" name="password" placeholder="Wachtwoord"/>
             <input type="hidden" name="submit" value="true"/>
-            <input type="submit" id="submit" value="Inloggen"/>
+            <input type="submit" id="login" name="login" value="Inloggen"/>
+            <?php
+            if (isset($_POST['login'])) {
+                include '../pagesFunctions/loginScript.php';
+                include 'DBconfig.php';
+                login();
+            }
+            ?>
         </form>
 
         <form class="registerForm" name="register" method="POST" enctype="multipart/form-data"
@@ -27,7 +34,14 @@ include 'header.php';
             <p>Wachtwoord</p>
             <input required type="password" name="password" placeholder="Wachtwoord"/>
             <input type="hidden" name="submit" value="true"/>
-            <input type="submit" id="submit" value="Registreren"/>
+            <input type="submit" id="register" name="register" value="Registreren"/>
         </form>
+        <?php
+        if (isset($_POST['register'])) {
+            include '../pagesFunctions/logoutScript.php';
+            include 'DBconfig.php';
+            register();
+        }
+        ?>
     </div>
     </body>
