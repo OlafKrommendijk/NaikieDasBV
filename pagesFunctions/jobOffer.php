@@ -186,5 +186,11 @@ function addNewJobOffer()
             exit;
         }
     }
-
+    //enters everything in database
+    $query = "INSERT INTO joboffer (idJobbranch, idJobfunction, offerName, description )  VALUES ('$jobBranch', '$jobFunction', '$jobName', '$jobDescription')";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+    echo "<script>alert('bestand is geupload');</script>";
+    exit;
 }
