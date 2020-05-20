@@ -11,13 +11,17 @@ function register()
 
 //Checks if an right email is entered and checks if it already exists in DB
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $checkedEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
         $sql = "SELECT * FROM userTable WHERE email = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($email));
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $response = null;
+
+        $sql = "SELECT * FROM manager WHERE manEmail = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($email));
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         //If email exists shows an error window
         if ($result > 0) {
@@ -33,6 +37,9 @@ function register()
             echo "<script>alert('Account aangemaakt');</script>";
             echo "<script>window.location.href = '../pagesInclude/loginPage.php';</script>";
         }
+    }else{
+        echo "<script>alert('Er is iets fout gegaan');</script>";
+        echo "<script>window.location.href = '../pagesInclude/loginPage.php';</script>";
     }
 }
 
