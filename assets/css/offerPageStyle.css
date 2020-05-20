@@ -9,5 +9,8 @@
 }
 
 .singleReaction{
+    display: flex;
     border: 1px solid black;
+    flex-flow: row wrap;
+    justify-content: space-between;
 }

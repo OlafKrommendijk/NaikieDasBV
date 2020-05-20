@@ -103,12 +103,12 @@ $offer = getOfferById($oId);
                     echo '<div class="singleReaction">';
                     echo '<a href="' . $cvLocation . '" download="cv' . $offerReactionID . '">Download CV</a><br>';
                     echo '<p>'.$offerMotivation.'</p>';
-                    echo '<a href="./acceptReaction.php?id=' . $offerReactionID . '">Accepteren</a><br>';
+                    echo '<div class="acceptOrReject"><a href="./acceptReaction.php?id=' . $offerReactionID . '">Accepteren</a><br>';
                     echo '<form method="post"> 
                           <input type="hidden" id="reactionId" name="reactionId" value="' . $offerReactionID . '">
                           <input type="submit" name="button" value="Afwijzen"/> 
                           </form> ';
-                    echo '</div>';
+                    echo '</div></div>';
 
                     if (isset($_POST['button'])) {
                         require_once '../pagesFunctions/mailFunctions.php';
