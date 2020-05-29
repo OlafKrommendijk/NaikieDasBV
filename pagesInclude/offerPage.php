@@ -16,6 +16,9 @@ $offer = getOfferById($oId);
 <div id="page-wrapper">
     <div class="offerStatus">
         <?php
+        require_once '../pagesFunctions/jobOffer.php';
+        $jobFunctions = getJobFunctions();
+
         if (isset($_SESSION["MANAGER"])) {
             $oId = $offer['jobofferID'];
             //Shows if an offer is on or off
@@ -31,6 +34,10 @@ $offer = getOfferById($oId);
             if (isset($_POST['deleteOffer'])) {
                 deleteJobOffer($oId);
             }
+            if (isset($_POST['editOffer'])) {
+                editJobOffer($oId);
+            }
+
             echo '<form action="" method="post" enctype="multipart/form-data">
             <label for="status">Kies een status:</label>
             <br>
@@ -39,13 +46,41 @@ $offer = getOfferById($oId);
                 <option value="1">Aan</option>  
             </select>
             <br>
-            <input type="submit" value="Bijwerken!" name="changeStatus">
+            <input type="submit" value="Status veranderen!" name="changeStatus">
             </form>';
 
 
             echo '<form action="" method="post" enctype="multipart/form-data">
-                    <input type="submit" value="Verwijderen!" name="deleteOffer">
+                    <input type="submit" value="Vacature verwijderen!" name="deleteOffer">
                   </form>
+                  </div>';
+
+            echo '<button class="openEditOffer" onClick="openEditForm()">Vacature bewerken</button>
+                  <div class="editFormPop" id="editForm">
+                   <form action="" method="post" enctype="multipart/form-data">
+                       <p>Vacature naam</p>
+                       <input title="jobName" type="text" name="jobName" id="jobName" value="'.$offer['offerName'].'">
+                       <br>
+                       <p>Vacature Functie</p>
+                       <select title="jobFunction" name="jobFunction" id="jobFunction">';
+                        foreach ($jobFunctions as $jobFunction) {
+                            echo '<option value="' . $jobFunction['jobfunctionID'] . '"> ' . $jobFunction['functionName'] . ' </option>';
+                        }
+            echo       '</select><p>Vacature Branch</p>
+                       <select title="jobBranch" name="jobBranch" id="jobBranch">';
+                        $jobBranches = getJobBranches();
+                        foreach ($jobBranches as $jobBranch) {
+                            echo '<option value=" ' . $jobBranch['jobbranchID'] . ' "> ' . $jobBranch['brancheName'] . ' </option>';
+                        }
+            echo        '</select> <p>Bestand uploaden</p>
+                        <input type="file" name="fileToUpload" id="fileToUpload" accept=".pdf,.doc">
+                        <br>
+                        <p>Of typ zelf een vacature</p>
+                        <input title="jobDescription" type="text" name="jobDescription" id="jobDescription" value="'.$offer['description'].'">
+                        <br>
+                        <input type="submit" value="Vacature Aanpassen!" name="editOffer">
+                  </form>
+                  </div>
                   </div>';
         }
 
@@ -123,3 +158,9 @@ $offer = getOfferById($oId);
             ?>
         </div>
     </div>
+
+<script>
+    function openEditForm() {
+        document.getElementById("editForm").style.display = "block";
+    }
+</script>

@@ -213,3 +213,55 @@ function deleteJobOffer($oId)
     echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
     exit;
 }
+
+function editJobOffer($oId){
+    include '../pagesInclude/DBconfig.php';
+
+    $jobName = htmlspecialchars($_POST['jobName']);
+    $jobFunction = htmlspecialchars($_POST['jobFunction']);
+    $jobBranch = htmlspecialchars($_POST['jobBranch']);
+    $jobDescription = htmlspecialchars($_POST['jobDescription']);
+
+    $jobFile = $_FILES['fileToUpload'];
+    if ((!empty($_POST['jobDescription'])) && !empty($jobFile['name'])) {
+        echo "<script>alert('Voeg of alleen een bestand toe of schrijf alleen een beschrijving');</script>";
+        echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+        exit;
+    }
+//checks if an file got added to the form, if so puts it in the right place
+    if (!empty($jobFile['name'])) {
+        $target_dir = "../assets/uploads/joboffers/";
+        $jobDescription = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+
+        //Trying to upload file
+        if (file_exists($jobDescription)) {
+            echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
+            echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+            exit;
+        } else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $jobDescription)) {
+                //enters everything in database
+                $query = "UPDATE joboffer SET idJobbranch = '$jobBranch', idJobfunction = '$jobFunction', offerName = '$jobName', description = '$jobDescription' WHERE jobofferID = '$oId'";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
+
+                echo "<script>alert('Vacature is bijgewerkt!');</script>";
+                echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+                exit;
+            } else {
+                echo "<script>alert('Bestand uploaden mislukt');</script>";
+                echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+                exit;
+            }
+        }
+
+    }
+    //enters everything in database
+    $query = "UPDATE joboffer SET idJobbranch = '$jobBranch', idJobfunction = '$jobFunction', offerName = '$jobName', description = '$jobDescription' WHERE jobofferID = '$oId'";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+
+    echo "<script>alert('Vacature is bijgewerkt!');</script>";
+    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+    exit;
+}
