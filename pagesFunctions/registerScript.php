@@ -21,13 +21,12 @@ function register()
         $stmt = $db->prepare($sql);
         $stmt->execute(array($email));
 
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $manResult = $stmt->fetch(PDO::FETCH_ASSOC);
 
         //If email exists shows an error window
-        if ($result > 0) {
+        if ($result > 0 || $manResult > 0) {
             echo "<script>alert('Dit emailadres is al in gebruik!');</script>";
             echo "<script>window.location.href = '../pagesInclude/loginPage.php';</script>";
-
         } else {
             //enters the data into the database
             $query = "INSERT INTO userTable (email, password)  VALUES ('$email', '$password')";
