@@ -11,9 +11,9 @@ include 'header.php';
 <div id="page-wrapper">
     <div class="left-bar">
         <p>Zoek een vacature</p>
-        <form action="">
-            <input type="text" placeholder="Vacature zoeken" name="search">
-            <button type="submit">Zoeken</button>
+        <form method="POST" enctype="multipart/form-data" action="" accept-charset="UTF-8">
+            <input type="text" placeholder="Vacature zoeken" name="searchName">
+            <input type="submit" id="submit" name="searchOffer" value="Zoeken!">
         </form>
 
         <label for="categorise">Categoriseer:</label>
@@ -48,7 +48,15 @@ include 'header.php';
             //gets all offers and shows them, normal user can only see offers that are "on" managers are able to see offers that are "off"
             require_once '../pagesFunctions/jobOffer.php';
 
-            $offers = getAllOffers();
+            require_once '../pagesFunctions/jobOffer.php';
+
+            if (isset($_POST['searchOffer'])) {
+                require_once '../pagesFunctions/jobOffer.php';
+                $offers = searchOffers();
+            }else {
+                $offers = getAllOffers();
+            }
+
             foreach ($offers as $offer) {
                 if (isset($_SESSION["MANAGER"])) {
                     if ($offer['status'] == 0) {

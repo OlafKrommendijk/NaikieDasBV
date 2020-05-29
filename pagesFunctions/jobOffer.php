@@ -265,3 +265,17 @@ function editJobOffer($oId){
     echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
     exit;
 }
+
+function searchOffers(){
+    include '../pagesInclude/DBconfig.php';
+
+    //Searches into the database for the right keywords and shows them
+
+    $search = htmlspecialchars($_POST['searchName']);
+
+    $query = "SELECT * FROM joboffer WHERE offerName LIKE '%$search%'";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
