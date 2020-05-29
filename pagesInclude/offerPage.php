@@ -74,7 +74,7 @@ $offer = getOfferById($oId);
         ?>
 
         <?php
-            if(!isset($_SESSION["MANAGER"])){
+            if( isset($_SESSION["STATUS"]) && !isset($_SESSION["MANAGER"]) ){
         echo '
             <form action="" method="post" enctype="multipart/form-data">
                 <h3>Reageren op de vacature</h3>
