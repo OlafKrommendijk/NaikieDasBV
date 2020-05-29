@@ -198,15 +198,18 @@ function addNewJobOffer()
 
 function deleteJobOffer($oId)
 {
-    //deletes an offer from DB
-    include '../pagesInclude/DBconfig.php';
 
-    $query = "DELETE FROM joboffer WHERE jobOfferID = " . $oId;
+    include '../pagesInclude/DBconfig.php';
+    //First we need to delete all reactions on this offer before deletion
+    $query = "DELETE FROM offerreaction WHERE idJoboffer = ".$oId;
     $stmt = $db->prepare($query);
     $stmt->execute();
 
-    var_dump($stmt);
+    //Here we delete the offer from the database
+    $query = "DELETE FROM joboffer WHERE jobOfferID =".$oId;
+    $stmt = $db->prepare($query);
+    $stmt->execute();
 
-//    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
-//    exit;
+    echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
+    exit;
 }
