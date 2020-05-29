@@ -165,7 +165,6 @@ function addNewJobOffer()
         $jobDescription = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
         //Trying to upload file
-
         if (file_exists($jobDescription)) {
             echo "<script>alert('Kies een andere naam voor uw bestand');</script>";
             echo "<script>window.location.href = '../pagesInclude/homepage.php';</script>";
